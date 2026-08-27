@@ -1,3 +1,4 @@
+
 // Package engine orchestrates the investigation pipeline:
 //
 //	scope → collect → build (timeline + graph + changes) → analyze → score
@@ -30,8 +31,13 @@ import (
 // data source.
 var ErrNoCollectors = errors.New("engine: no collectors registered")
 
-// Version is stamped at build time (-ldflags "-X github.com/GlediLami/kubetective/internal/engine.Version=...").
-var Version = "v1.0.0"
+// Build metadata is stamped at release time with -ldflags. Empty values
+// identify a local development build.
+var (
+	Version   = "v1.0.0"
+	Commit    string
+	BuildDate string
+)
 
 // Adaptive collection bounds: at most two targeted
 // rounds, ≤5 requests, total cost ≤ requestBudget.
